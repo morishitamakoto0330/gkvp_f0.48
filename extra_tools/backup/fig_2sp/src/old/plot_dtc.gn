@@ -1,0 +1,26 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output '../eps/dtc.eps'
+  set size 0.8,0.6
+  set border
+  set grid
+  set key out
+  set key box
+  set pointsize 0
+
+  set xlabel 'Time t v_{ti}/L_n'
+  set ylabel 'Time step sizes [L_n/v_{ti}]'
+  set logscale y
+  set format y '%2.0e'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../../adata/dt_control.all' u 1:2 ti 'dt' lw 3 w l, \
+     '../../adata/dt_control.all' u 1:3 ti 'dt_{Max}' lw 3 w l, \
+     '../../adata/dt_control.all' u 1:4 ti 'dt_{N}' lw 3 w l
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

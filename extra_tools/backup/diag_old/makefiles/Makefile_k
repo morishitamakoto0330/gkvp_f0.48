@@ -1,0 +1,26 @@
+### K cross compiler ###
+#FC = frtpx
+#FFLAG = -V -Kfast,parallel,ocl,optmsg=2 -Qt -Cpp -X9 -fw -Kopenmp
+#INC = -I/volume1/home/apps/fftw/3.3/include
+#LIB = -L/home/apps/fftw/3.3/lib64 -lfftw3_omp -lfftw3 -lm 
+
+### GNU Fortran compiler ###
+FC = gfortran
+#FFLAG = -Os -fconvert=big-endian -frecord-marker=4 -fopenmp
+FFLAG = -Os -mcmodel=medium -fconvert=big-endian -frecord-marker=4 -fopenmp
+INC = -I/volume1/home/hp120011/k00065/mylib/fftw/3.3.3/include
+LIB = -L/volume1/home/hp120011/k00065/mylib/fftw/3.3.3/lib -lfftw3_omp -lfftw3 -lm
+
+SRC = v17diag
+LDM = diag.exe
+
+diag: ${SRC}.f90
+	${FC} ${FFLAG} -c ${SRC}.f90 ${INC}
+	${FC} ${FFLAG} ${SRC}.o -o ${LDM} ${LIB}
+
+clean:
+	rm -f *.lst *.o *.mod *.exe go.diag.i* CompileList.txt
+
+clear:
+	rm -f ./*.err ./*.out
+

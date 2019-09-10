@@ -1,0 +1,59 @@
+#!/bin/awk
+# <Note>
+#   Time derivative is calculated by 4th order central finite difference.
+# <How to use>
+#   awk -f calc_entropybalance.awk filename > out.dat
+#
+
+BEGIN{
+  dtout_eng = 0.01
+}
+
+{
+   time[NR] = $1      # Time
+     Si[NR] = $2      #           Ion gyrocenter entropy S_i
+     Se[NR] = $3      #      Electron gyrocenter entropy S_e
+     WE[NR] = $4      #                  Electric energy W_E
+     WM[NR] = $5      #                  Magnetic energy W_M
+     Gi[NR] = $6      #                Ion particle flux T_i*(1+eta_i)*G_i
+     Ge[NR] = $7      #           Electron particle flux T_e*(1+eta_e)*G_e
+     Qi[NR] = $8      #                    Ion heat flux eta_i*Q_i
+     Qe[NR] = $9      #               Electron heat flux eta_e*Q_e
+     Di[NR] = $10     #      Ion collisional dissipation eta_i*Q_i
+     De[NR] = $11     # Electron collisional dissipation flux eta_e*Q_e
+     Ai[NR] = $12     #       Ion artificial dissipation A_i
+     Ae[NR] = $13     #  Electron artificial dissipation A_e
+}
+
+END{
+  for(ir=3; ir<=NR-2; ir++){
+    cef = 1 / ( 12 * dtout_eng )
+    dSidt[ir] = cef * ( - Si[ir+2] + 8 * Si[ir+1] - 8 * Si[ir-1] + Si[ir-2] )
+    dSedt[ir] = cef * ( - Se[ir+2] + 8 * Se[ir+1] - 8 * Se[ir-1] + Se[ir-2] )
+    dWEdt[ir] = cef * ( - WE[ir+2] + 8 * WE[ir+1] - 8 * WE[ir-1] + WE[ir-2] )
+    dWMdt[ir] = cef * ( - WM[ir+2] + 8 * WM[ir+1] - 8 * WM[ir-1] + WM[ir-2] )
+  }
+
+  printf( "%17s%17s%17s%17s%17s%17s%17s%17s%17s%17s%17s%17s%17s\n",  \
+          "#            time", "dSidt", "dSedt", "dWEdt", "dWMdt",   \
+                               "Gi", "Gi", "Qi", "Qe",               \
+                               "Di", "De", "Ai", "Ae"              )
+  for(ir=1; ir<=2; ir++){
+    printf( "%17.7e%17s%17s%17s%17s%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e\n",  \
+            time[ir], "NaN", "Nan", "NaN", "NaN",                 \
+                      Gi[ir], Ge[ir], Qi[ir], Qe[ir],             \
+                      Di[ir], De[ir], Ai[ir], Ae[ir]            )
+  }
+  for(ir=3; ir<=NR-2; ir++){
+    printf( "%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e\n",  \
+            time[ir], dSidt[ir], dSedt[ir], dWEdt[ir], dWMdt[ir], \
+                      Gi[ir], Ge[ir], Qi[ir], Qe[ir],             \
+                      Di[ir], De[ir], Ai[ir], Ae[ir]            )
+  }
+  for(ir=NR-1; ir<=NR; ir++){
+    printf( "%17.7e%17s%17s%17s%17s%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e%17.7e\n",  \
+            time[ir], "NaN", "Nan", "NaN", "NaN",                 \
+                      Gi[ir], Ge[ir], Qi[ir], Qe[ir],             \
+                      Di[ir], De[ir], Ai[ir], Ae[ir]            )
+  }
+}

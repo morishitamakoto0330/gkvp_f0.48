@@ -1,0 +1,44 @@
+#!/bin/sh
+### To submit a job: pjsub --interact --sparam "wait-time=3600" go.diag
+
+#PJM --rsc-list "node=1"
+#PJM --rsc-list "elapse=01:00:00"
+#PJM --mpi "proc=1"
+#PJM -j
+#PJM -s
+
+export PARALLEL=8          # Thread number for automatic parallelization
+export OMP_NUM_THREADS=8   # Thread number for Open MP
+
+# Environment setting
+. /work/system/Env_base_1.2.0-13
+
+
+
+SRC=v14diag.f90
+DIR=/volume61/data/hp120011/maeyama/gkvp/f0.30/itgetg/multi_beta001/
+
+
+
+### Compile
+FC=frt
+FFLAG="-V -Kfast,parallel,ocl,optmsg=2 -Qt -Cpp -X9 -fw -fs"
+LDM=diag.exe
+INC="-I/home/apps/fftw/3.3/include"
+LIB="-SSL2 -L/home/apps/fftw/3.3/lib64 -lfftw3_omp -lfftw3 -lm"
+
+echo "Begin compilation."
+${FC} ${FFLAG} ${SRC} -o ${LDM} ${INC} ${LIB}
+echo "End compilation."
+
+
+### Run
+mkdir -p ${DIR}plt
+cp ${LDM} ${DIR}
+cd ${DIR}
+
+echo "Begin diagnostics."
+date
+exec ./${LDM}
+echo "End diagnostics."
+date

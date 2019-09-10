@@ -1,0 +1,52 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+#  set output '../eps/conservation.eps'
+  set size 0.7,0.6
+  set border
+  set grid
+  set key out
+  set key box
+  set pointsize 0
+
+  set xlabel 'Time t v_{ti}/L_n'
+  set ylabel 'Entropy variables [n_0T_iv_{ti}{/Symbol r}_{ti}^2/L_n^3]'
+  set xrange [*:*]
+  set yrange [*:*]
+
+  set output '../eps/entropy.eps'
+plot '../data/entropybalance.dat' u 1:2 ti 'dS_i/dt' lw 3 w l
+
+  set output '../eps/fieldenergy.eps'
+plot '../data/entropybalance.dat' u 1:3 ti 'dW_E/dt' lw 3 w l
+
+  set output '../eps/p_flux.eps'
+plot '../data/entropybalance.dat' u 1:5 ti 'G_{iE}' lw 3 w l
+
+  set output '../eps/h_flux.eps'
+plot '../data/entropybalance.dat' u 1:7 ti 'Q_{iE}' lw 3 w l
+
+  set output '../eps/c_disp.eps'
+plot '../data/entropybalance.dat' u 1:9 ti 'D_i' lw 3 w l
+
+  set output '../eps/a_disp.eps'
+plot '../data/entropybalance.dat' u 1:10 ti 'F_i' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:11 ti 'A_{iz}' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:12 ti 'A_{iv}' lw 3 w l
+
+  set output '../eps/balance.eps'
+plot '../data/entropybalance.dat' u 1:($2+$3+$4-$5-$6-$7-$8-$9-$10-$11-$12) ti '{/Symbol D}' lw 3 w l
+
+  set output '../eps/entropybalance.eps'
+plot '../data/entropybalance.dat' u 1:2 ti 'dS_i/dt' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:($3+$4) ti 'dW_E/dt' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:($5+$6) ti 'G_i' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:($7+$8) ti 'Q_i' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:($9+$10+$11+$12) ti 'Eff D_i' lw 3 w l, \
+     '../data/entropybalance.dat' u 1:($2+$3+$4-$5-$6-$7-$8-$9-$10-$11-$12) ti '{/Symbol D}' lw 3 w l
+#pause -1
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

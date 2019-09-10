@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{graphicx}
+%%%% Page Style for A4 %%%%
+\paperwidth 210mm
+\paperheight 297mm
+\evensidemargin -20mm
+\oddsidemargin -20mm
+\textwidth 199mm
+\topmargin -20mm
+\headheight 0mm
+\topskip 0mm
+\textheight 270mm
+\footskip 0mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\input{parameters.tex}
+
+\underline{log}\\
+\input{log.tex}
+
+\newpage
+
+\begin{figure}[!ht]
+\includegraphics[]{elt_coarse.eps}\\
+\includegraphics[]{elt_medium.eps}\\
+\includegraphics[]{elt_fine.eps}
+\end{figure}
+
+\begin{figure}[!ht]
+%\includegraphics[]{grow.eps}
+%\includegraphics[]{freq.eps}\\
+\includegraphics[]{tdtc.eps}\\
+\includegraphics[]{teng.eps}\\
+\includegraphics[]{tmen.eps}
+\end{figure}
+
+\begin{figure}[!ht]
+\includegraphics[]{tent.eps}\\
+\includegraphics[]{tent.0.eps}
+\includegraphics[]{tent.1.eps}\\
+\includegraphics[]{teint.eps}
+\includegraphics[]{tmint.eps}\\
+\end{figure}
+
+\begin{figure}[!ht]
+\includegraphics[]{tent.0.zf.eps}
+\includegraphics[]{tent.1.zf.eps}\\
+\includegraphics[]{teint.zf.eps}
+\includegraphics[]{tmint.zf.eps}\\
+\end{figure}
+
+\begin{figure}[!ht]
+\includegraphics[]{tent.0.nz.eps}
+\includegraphics[]{tent.1.nz.eps}\\
+\includegraphics[]{teint.nz.eps}
+\includegraphics[]{tmint.nz.eps}\\
+\end{figure}
+
+
+\end{document}
+

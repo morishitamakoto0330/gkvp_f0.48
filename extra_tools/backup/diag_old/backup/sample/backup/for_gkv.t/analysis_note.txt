@@ -1,0 +1,28 @@
+
+
+
+27 Aug. 2012 - v10analysis
+ * Add SUBROUTINE analysis_zvm, fzvminzv, fzvminvm
+
+
+27 Aug. 2012 - v09analysis
+ * Add SUBROUTINE fluxintx.
+ * Add "# set output ***.jpg"
+
+
+26 Aug. 2012 - v08analysis
+ * Add SUBROUTINE fluxinkxky
+
+
+26 Aug. 2012 - v07analysis
+ * analysis_phi + analysis_Al -> analysis_mom
+
+
+26 Aug. 2012 - v06analysis
+ * Add SUBROUTINE Alinkxky, Alinxy, Alinzz
+
+
+26 Aug. 2012 - v05analysis
+ * Add SUBROUTINE ffinzv, phiinkxky, phiinxy, phiinzz
+
+

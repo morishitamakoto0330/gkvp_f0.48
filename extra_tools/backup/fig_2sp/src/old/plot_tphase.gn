@@ -1,0 +1,31 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output '../eps/tphase.eps'
+  set size 0.8,0.6
+  set border
+  set grid
+  set key out
+  set key box
+  set pointsize 0
+
+  set xlabel 'Time t v_{ti}/L_n'
+  set ylabel 'Phase of {/Symbol f}_k(kx=0) [rad]'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../../adata/gkv.phs.all' u 1:2 ti 'iky=1' w lp, \
+     '../../adata/gkv.phs.all' u 1:3 ti 'iky=2' w lp, \
+     '../../adata/gkv.phs.all' u 1:4 ti 'iky=3' w lp, \
+     '../../adata/gkv.phs.all' u 1:5 ti 'iky=4' w lp, \
+     '../../adata/gkv.phs.all' u 1:6 ti 'iky=5' w lp, \
+     '../../adata/gkv.phs.all' u 1:7 ti 'iky=6' w lp, \
+     '../../adata/gkv.phs.all' u 1:8 ti 'iky=7' w lp, \
+     '../../adata/gkv.phs.all' u 1:9 ti 'iky=8' w lp
+#     '../../adata/gkv.phs.all' u 1:10 ti 'iky=9' w lp, \
+#     '../../adata/gkv.phs.all' u 1:11 ti 'iky=10' w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

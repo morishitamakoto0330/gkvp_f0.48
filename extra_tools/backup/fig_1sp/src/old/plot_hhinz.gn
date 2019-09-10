@@ -1,0 +1,25 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set size 1.0,0.6
+  set border
+  set grid
+  set nokey
+  set pointsize 0
+
+  set xlabel 'z'
+  set xrange [*:*]
+  set yrange [*:*]
+
+  set output '../eps/hh1inz.eps'
+  set ylabel '|hh(is=1)|'
+plot '../../adata/gkv.hhz.001' u 3:4 w lp
+
+  set output '../eps/hh2inz.eps'
+  set ylabel '|hh(is=2)|'
+plot '../../adata/gkv.hhz.001' u 3:5 w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

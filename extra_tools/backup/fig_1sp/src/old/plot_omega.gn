@@ -1,0 +1,31 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set size 0.6,0.6
+  set border
+  set grid
+  set nokey
+  set pointsize 0
+
+### growth rate ###
+  set output '../eps/growthrate.eps'
+  set xlabel 'Poloidal wavenumber k_y{/Symbol r}_{ti}'
+  set ylabel 'Linear growth rate {/Symbol g}_l L_n/v_{ti}'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../../adata/gkv.omg.001' u 1:2 ti '' w lp
+
+### frequency ###
+  set output '../eps/frequency.eps'
+  set xlabel 'Poloidal wavenumber k_y{/Symbol r}_{ti}'
+  set ylabel 'Real frequency {/Symbol w}_r L_n/v_{ti}'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../../adata/gkv.omg.001' u 1:3 ti '' w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

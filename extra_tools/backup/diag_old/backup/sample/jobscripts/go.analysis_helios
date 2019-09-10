@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#SBATCH -A HBGK           # Project name
+#SBATCH -J analysis       # Job name
+#SBATCH -N 1              # Number of nodes
+#SBATCH -n 1              # Number of tasks
+#SBATCH -c 8
+#SBATCH -o %j.out         # strour filename (%j is JobID.)
+#SBATCH -e %j.err         # strerr filename
+#SBATCH -t 12:00:00       # Execute time
+
+#module load intelmpi intel
+module load intel
+
+export OMP_NUM_THREADS=8
+export MKL_NUM_THREADS=1
+
+
+### Working directory 
+execdir=/csc/workdir3/smaeyama/gkvp/f0.28/test13
+
+
+cp analysis.exe $execdir
+mkdir -p $execdir/plt
+
+### Run
+date
+cd $execdir
+$execdir/analysis.exe
+date

@@ -1,0 +1,24 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set size square
+  set pm3d map
+  set nokey
+
+  set xlabel 'vl'
+  set ylabel 'mu'
+  set xrange [*:*]
+  set yrange [*:*]
+
+  set output '../eps/hh1invm.eps'
+  set title '|hh(is=1)|'
+splot '../data/hhinvm.dat' u 1:2:3
+
+  set output '../eps/hh2invm.eps'
+  set title '|hh(is=2)|'
+splot '../data/hhinvm.dat' u 1:2:4
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

@@ -1,0 +1,36 @@
+#!/bin/sh
+### To submit a job: 1. Login to Pre/Post server - ssh ppb
+###                  2. Execute                  - ./go.diag_ppb
+
+
+
+SRC=v14diag.f90
+DIR=/volume61/data/hp120011/maeyama/gkvp/f0.30/itgetg/multi_beta001/
+
+
+
+### Compile
+FC=gfortran
+#FFLAG="-Os -fconvert=big-endian -frecord-marker=4 -fopenmp"
+FFLAG="-Os -mcmodel=medium -fconvert=big-endian -frecord-marker=4 -fopenmp"
+LDM=diag.exe
+INC="-I/volume1/home/hp120011/k00065/mylib/fftw/3.3.3/include"
+LIB="-L/volume1/home/hp120011/k00065/mylib/fftw/3.3.3/lib -lfftw3_omp -lfftw3 -lm"
+
+export OMP_NUM_THREADS=8   # Thread number for Open MP
+
+echo "Begin compilation."
+${FC} ${FFLAG} ${SRC} -o ${LDM} ${INC} ${LIB}
+echo "End compilation."
+
+
+### Run
+mkdir -p ${DIR}plt
+cp ${LDM} ${DIR}
+cd ${DIR}
+
+echo "Begin diagnostics."
+date
+./${LDM}
+echo "End diagnostics."
+date

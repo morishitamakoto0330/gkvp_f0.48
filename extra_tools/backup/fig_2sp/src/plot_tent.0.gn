@@ -1,0 +1,30 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output "./eps/tent.0.eps"
+  set size 0.7,0.7
+  set border
+  set grid
+  set key out
+  set key box spacing 1.5 width +0
+  set pointsize 0
+
+  set xlabel "Time t v_{ref}/L_{ref}"
+  set ylabel "Entropy variables [{/Symbol d}^2n_{ref}T_{ref}v_{ref}/L_{ref}]"
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot "./data/ent.0.dat" u 1:($2+$3) ti "dS_e/dt" lw 3 w l, \
+                     "" u 1:($8+$9) ti "R_{eE}" lw 3 w l, \
+                     "" u 1:($10+$11) ti "R_{eM}" lw 3 w l, \
+                     "" u 1:18 ti "T_e{/Symbol G}_{eE}/L_{pe}" lw 3 w l, \
+                     "" u 1:19 ti "T_e{/Symbol G}_{eM}/L_{pe}" lw 3 w l, \
+                     "" u 1:20 ti "{/Symbol Q}_{eE}/L_{Te}" lw 3 w l, \
+                     "" u 1:21 ti "{/Symbol Q}_{eM}/L_{Te}" lw 3 w l, \
+                     "" u 1:($16+$17) ti "D_e" lw 3 w l, \
+                     "" u 1:($2+$3-$8-$9-$10-$11-$16-$17-$18-$19-$20-$21) ti "Error" lt -1 lw 1 w l
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

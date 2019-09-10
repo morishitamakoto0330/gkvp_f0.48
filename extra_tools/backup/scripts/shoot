@@ -1,0 +1,47 @@
+#!/bin/sh
+
+if [[ -z "$1" ]]; then
+
+  echo "Set the next run number. e.g., ./shoot 1"
+  exit
+
+elif (( $1 == 1 )); then
+
+  echo "Shoot inum=001? (y/n)"
+  read answer
+  if [[ $answer != "y" ]]; then
+    echo "Stop shooting."
+    exit
+  fi
+  ./go.sh
+
+elif (( $1 > 1 )); then
+
+  cold=`echo $1 | awk '{printf("%03d",$1-1)}'`
+  cnew=`echo $1 | awk '{printf("%03d",$1  )}'`
+  if [[ ! -e "gkvp_f0.48_namelist.${cold}" ]]; then
+    echo "There is no gkvp_f0.48_namelist.${cold}"
+    exit
+  fi
+  if [[ -e "gkvp_f0.48_namelist.${cnew}" ]]; then
+    echo "gkvp_f0.48_namelist.${cnew} already exist. Shoot it anyway? (y/n)"
+    read answer
+    if [[ $answer != "y" ]]; then
+      echo "Stop shooting."
+      exit
+    fi
+  fi
+  grep "namelist.${cold}" go.sh
+  sed -i -e "s/namelist.${cold}/namelist.${cnew}/g" go.sh
+  grep "namelist.${cold}" sub.q
+  sed -i -e "s/namelist.${cold}/namelist.${cnew}/g" sub.q
+  grep "inum=${cold}" gkvp_f0.48_namelist.${cold}
+  sed -e "s/inum=${cold}/inum=${cnew}/g" gkvp_f0.48_namelist.${cold} > gkvp_f0.48_namelist.${cnew}
+  ./go.sh
+
+else
+
+  echo "Run number should be larger than 0."
+  exit
+
+fi

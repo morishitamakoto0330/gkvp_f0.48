@@ -1,0 +1,23 @@
+#FC = mpifrtpx
+FC = frtpx
+FFLAGS = -Kfast,parallel,ocl,optmsg=2 -Qt -Cpp -X9 -fw -fs
+
+SRC = v08analysis.f90
+PROG = 'analysis.exe'
+
+INC = -I/usr/local/fftw/3.3/include
+LIB = -SSL2 -L/usr/local/fftw/3.3/lib64 -lfftw3_omp -lfftw3 -lm
+
+
+analysis:	$(SRC)
+	
+	$(FC) $(FFLAGS) $(SRC) -o $(PROG) $(INC) $(LIB)
+
+	\rm -f *.lst *.o *.mod
+
+clean:
+	rm -f *.lst *.o *.mod *.exe go.analysis.o* CompileList.txt
+
+clear:
+	rm -f ./*.err ./*.out
+

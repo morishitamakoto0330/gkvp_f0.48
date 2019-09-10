@@ -1,0 +1,21 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output "./eps/grow.eps"
+  set size 0.7,0.7
+  set border
+  set grid
+  unset key
+  set pointsize 0
+
+  set xlabel "Poloidal wave number k_y {/Symbol r}_{ref}"
+  set ylabel "Growthrate {/Symbol g}_l L_{ref}/v_{ref}"
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot "./data/frq.dat" u 1:2 ti "" lw 3 w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

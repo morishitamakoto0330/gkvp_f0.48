@@ -1,0 +1,21 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output '../eps/phiinz.eps'
+  set size 1.0,0.6
+  set border
+  set grid
+  set nokey
+  set pointsize 0
+
+  set xlabel 'z'
+  set ylabel '|phi|'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../../adata/gkv.phz.001' u 3:4 w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

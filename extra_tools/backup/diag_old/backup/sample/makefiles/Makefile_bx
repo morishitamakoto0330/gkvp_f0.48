@@ -1,0 +1,24 @@
+#FC = mpifrt
+FC = frt
+FFLAGS = -Kfast,parallel,pmsg,ocl,prefetch -Qt -Cpp -X9 -fw -fs
+FFLAGS_OMP = -KOMP
+
+SRC = v08analysis.f90
+PROG = 'analysis.exe'
+
+INC = -I/sysdata/center/shien/FFTW/fftw3.2.2/include
+LIB = -SSL2 -L/sysdata/center/shien/FFTW/fftw3.2.2/lib -lfftw3 -lm
+
+
+analysis:	$(SRC)
+	
+	$(FC) $(FFLAGS) $(SRC) -o $(PROG) $(INC) $(LIB)
+
+	\rm -f *.lst *.o *.mod
+
+clean:
+	rm -f *.lst *.o *.mod *.exe go.analysis.o* CompileList.txt
+
+clear:
+	rm -f ./*.err ./*.out
+

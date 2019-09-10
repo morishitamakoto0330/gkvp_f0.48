@@ -1,0 +1,25 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output "./eps/tmint.zf.eps"
+  set size 0.7,0.7
+  set border
+  set grid
+  set key out
+  set key box spacing 1.5 width +0
+  set pointsize 0
+
+  set xlabel "Time t v_{ref}/L_{ref}"
+  set ylabel "Entropy variables [{/Symbol d}^2n_{ref}T_{ref}v_{ref}/L_{ref}]"
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot "./data/ent.0.dat" u 1:7 ti "dW_M/dt^{(z)}" lw 3 w l, \
+                     "" u 1:(-$11) ti "-R_{eM}^{(z)}" lw 3 w l, \
+     "./data/ent.1.dat" u 1:(-$11) ti "-R_{iM}^{(z)}" lw 3 w l, \
+     "<paste ./data/ent.0.dat ./data/ent.1.dat" u 1:($7+$11+$32) ti "Error" lt -1 lw 1 w l
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

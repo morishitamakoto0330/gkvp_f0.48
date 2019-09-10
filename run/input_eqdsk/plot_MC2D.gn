@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+#
+#  Plot magnetic coordinates on (R,Z) plane
+#
+
+input1 = 'igs_sample_nss21ntheta33/MC2Dt.OUT'
+input2 = 'igs_sample_nss21ntheta33/MC2Ds.OUT'
+
+set xlabel 'Major radius R/R_0'
+set ylabel 'Height Z/R_0'
+
+set title 'Axisymmetric coord.'
+plot input1 u 3:6 lt 1 w l, \
+     input2 u 3:6 lt 3 w l
+pause -1
+
+set title 'Boozer coord.'
+plot input1 u 15:18 lt 1 w l, \
+     input2 u 15:18 lt 3 w l
+pause -1
+
+set title 'Hamada coord.'
+plot input1 u 27:30 lt 1 w l, \
+     input2 u 27:30 lt 3 w l
+pause -1

@@ -1,0 +1,89 @@
+FC = mpifrtpx
+FFLAGS = -Kfast,parallel,ocl,optmsg=2 -Qt -Cpp -X9 -fs -fw
+FFLAGS_OMP = -Kopenmp
+
+PROG = 'gkvp_mpifft.exe'
+
+SRC = ../src/
+MYL = ../lib/
+
+MATH = gkvp_f0.30_math_SSL2
+FFT = gkvp_f0.30_fft_fftw
+INC = -I/usr/local/fftw/3.3/include
+LIB = -SSL2 -L/usr/local/fftw/3.3/lib64 -lfftw3 -lm
+
+
+gkvp:	$(SRC)gkvp_f0.30_header.f90\
+	$(SRC)gkvp_f0.30_mpienv.f90\
+	$(MYL)$(MATH).f90\
+	$(SRC)gkvp_f0.30_clock.f90\
+	$(SRC)gkvp_f0.30_intgrl.f90\
+	$(SRC)gkvp_f0.30_tips.f90\
+	$(SRC)gkvp_f0.30_vmecin.f90\
+	$(SRC)gkvp_f0.30_bndry.f90\
+	$(SRC)gkvp_f0.30_colli.f90\
+	$(SRC)$(FFT).f90\
+	$(SRC)gkvp_f0.30_fld.f90\
+	$(SRC)gkvp_f0.30_freq.f90\
+	$(SRC)gkvp_f0.30_zfilter.f90\
+	$(SRC)gkvp_f0.30_exb.f90\
+	$(SRC)gkvp_f0.30_trans.f90\
+	$(SRC)gkvp_f0.30_advnc.f90\
+	$(SRC)gkvp_f0.30_dtc.f90\
+	$(SRC)gkvp_f0.30_out.f90\
+	$(SRC)gkvp_f0.30_set.f90\
+	$(SRC)gkvp_f0.30_main.f90
+
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_header.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_mpienv.f90
+	$(FC) $(FFLAGS) -c $(MYL)$(MATH).f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_clock.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_intgrl.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_tips.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_vmecin.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_bndry.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_colli.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)$(FFT).f90 $(INC)
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_fld.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_freq.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_zfilter.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_exb.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_trans.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_advnc.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_dtc.f90
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) -c $(SRC)gkvp_f0.30_out.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_set.f90
+	$(FC) $(FFLAGS) -c $(SRC)gkvp_f0.30_main.f90
+
+	$(FC) $(FFLAGS)	$(FFLAGS_OMP) \
+			gkvp_f0.30_header.o\
+			gkvp_f0.30_mpienv.o\
+			$(MATH).o\
+			gkvp_f0.30_clock.o\
+			gkvp_f0.30_intgrl.o\
+			gkvp_f0.30_tips.o\
+			gkvp_f0.30_vmecin.o\
+			gkvp_f0.30_bndry.o\
+			gkvp_f0.30_colli.o\
+			$(FFT).o\
+			gkvp_f0.30_fld.o\
+			gkvp_f0.30_freq.o\
+			gkvp_f0.30_zfilter.o\
+			gkvp_f0.30_exb.o\
+			gkvp_f0.30_trans.o\
+			gkvp_f0.30_advnc.o\
+			gkvp_f0.30_dtc.o\
+			gkvp_f0.30_out.o\
+			gkvp_f0.30_set.o\
+                        gkvp_f0.30_main.o\
+			-o $(PROG) $(LIB)
+
+	\cp *.lst *.o *.mod ../src/
+	\rm -f *.lst *.o *.mod
+
+clean:
+	rm -f ../src/*.o ../src/*.mod ../src/*.lst ./*.exe ./CompileList.txt ./*q.o*
+
+clear:
+	rm -f ./*.o ./*.mod ./*.lst
+ 

@@ -1,0 +1,32 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output "./eps/tent.1.nz.eps"
+  set size 0.7,0.7
+  set border
+  set grid
+  set key out
+  set key box spacing 1.5 width +0
+  set pointsize 0
+
+  set xlabel "Time t v_{ref}/L_{ref}"
+  set ylabel "Entropy variables [{/Symbol d}^2n_{ref}T_{ref}v_{ref}/L_{ref}]"
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot "./data/ent.1.dat" u 1:2 ti "dS_i/dt^{(t)}" lw 3 w l, \
+                     "" u 1:8 ti "R_{iE}^{(t)}" lw 3 w l, \
+                     "" u 1:10 ti "R_{iM}^{(t)}" lw 3 w l, \
+                     "" u 1:12 ti "-I_{iE}^{(z)}" lw 3 w l, \
+                     "" u 1:14 ti "-I_{iM}^{(z)}" lw 3 w l, \
+                     "" u 1:18 ti "T_i{/Symbol G}_{iE}/L_{pi}" lw 3 w l, \
+                     "" u 1:19 ti "T_i{/Symbol G}_{iM}/L_{pi}" lw 3 w l, \
+                     "" u 1:20 ti "{/Symbol Q}_{iE}/L_{Ti}" lw 3 w l, \
+                     "" u 1:21 ti "{/Symbol Q}_{iM}/L_{Ti}" lw 3 w l, \
+                     "" u 1:16 ti "D_i^{(t)}" lw 3 w l, \
+                     "" u 1:($2-$8-$10-$12-$14-$16-$18-$19-$20-$21) ti "Error" lt -1 lw 1 w l
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

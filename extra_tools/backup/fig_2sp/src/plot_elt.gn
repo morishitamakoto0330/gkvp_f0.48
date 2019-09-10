@@ -1,0 +1,27 @@
+#!/usr/bin/gnuplot
+  set term postscript eps enhanced color
+  set nokey
+
+  set style data histogram
+#  set xtic rotate by -60
+  set xtic rotate by -45
+
+  set ylabel "Elapsed time [sec]"
+
+  set title "Coasely-classified elapsed time"
+  set output "./eps/elt_coarse.eps"
+  set size 0.4,0.6
+  plot "./data/elt_coarse.dat" u 3:xtic(1)
+#  pause -1
+
+  set title "Moderately-classified elapsed time"
+  set output "./eps/elt_medium.eps"
+  set size 0.7,0.6
+  plot "./data/elt_medium.dat" u 3:xtic(1)
+#  pause -1
+
+  set title "Finely-classified elapsed time"
+  set output "./eps/elt_fine.eps"
+  set size 1.3,0.7
+  plot "./data/elt_fine.dat" u 3:xtic(1)
+#  pause -1

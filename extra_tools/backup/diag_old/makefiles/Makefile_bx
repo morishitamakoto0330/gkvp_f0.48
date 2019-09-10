@@ -1,0 +1,24 @@
+#FC = mpifrt
+FC = frt
+FFLAGS = -Kfast,parallel,pmsg,ocl,prefetch -Qt -Cpp -X9 -fw -fs
+FFLAGS_OMP = -KOMP
+
+SRC = v17diag.f90
+PROG = 'diag.exe'
+
+INC = -I/sysdata/center/shien/FFTW/fftw3.2.2/include
+LIB = -SSL2 -L/sysdata/center/shien/FFTW/fftw3.2.2/lib -lfftw3 -lm
+
+
+diag:	$(SRC)
+	
+	$(FC) $(FFLAGS) $(FFLAGS_OMP) $(SRC) -o $(PROG) $(INC) $(LIB)
+
+	\rm -f *.lst *.o *.mod
+
+clean:
+	rm -f *.lst *.o *.mod *.exe go.diag.e* go.diag.o* CompileList.txt
+
+clear:
+	rm -f ./*.err ./*.out
+

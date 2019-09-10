@@ -1,0 +1,24 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set size square
+  set pm3d map
+  set nokey
+
+  set xlabel 'kx'
+  set ylabel 'ky'
+  set xrange [*:*]
+  set yrange [*:*]
+
+  set output '../eps/hh1inkxky.eps'
+  set title '|hh(is=1)|'
+splot '../../adata/gkv.hhk.001' u 1:2:3
+
+  set output '../eps/hh2inkxky.eps'
+  set title '|hh(is=2)|'
+splot '../../adata/gkv.hhk.001' u 1:2:4
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

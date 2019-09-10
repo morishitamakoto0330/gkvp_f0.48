@@ -1,0 +1,49 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output "./eps/teng.eps"
+  set size 1.0,0.7
+  set border
+  set grid
+  set key out
+  set key box
+  set pointsize 0
+
+  set xlabel "Time t v_{ref}/L_{ref}"
+  set ylabel "Electric energy {/Symbol d}^2<|e{/Symbol f}_k|^2>/T_{ref}^2"
+  set logscale y
+  set format y "%2.0e"
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot "./data/eng.dat" u 1:2  ti "Total" lw 2 w l, \
+                   "" u 1:3  ti "my=0 " lw 2 w l, \
+                   "" u 1:4  ti "my=1 " lw 2 w l, \
+                   "" u 1:5  ti "my=2 " lw 2 w l, \
+                   "" u 1:6  ti "my=3 " lw 2 w l, \
+                   "" u 1:7  ti "my=4 " lw 2 w l, \
+                   "" u 1:8  ti "my=5 " lw 2 w l, \
+                   "" u 1:9  ti "my=6 " lw 2 w l, \
+                   "" u 1:10 ti "my=7 " lw 2 w l, \
+                   "" u 1:11 ti "my=8 " lw 2 w l, \
+                   "" u 1:12 ti "my=9 " lw 2 w l, \
+                   "" u 1:13 ti "my=10" lw 2 w l, \
+                   "" u 1:14 ti "my=11" lw 2 w l, \
+                   "" u 1:15 ti "my=12" lw 2 w l, \
+                   "" u 1:16 ti "my=13" lw 2 w l, \
+                   "" u 1:17 ti "my=14" lw 2 w l, \
+                   "" u 1:18 ti "my=15" lw 2 w l, \
+                   "" u 1:19 ti "my=16" lw 2 w l, \
+                   "" u 1:20 ti "my=17" lw 2 w l, \
+                   "" u 1:21 ti "my=18" lw 2 w l, \
+                   "" u 1:22 ti "my=19" lw 2 w l, \
+                   "" u 1:23 ti "my=20" lw 2 w l, \
+                   "" u 1:24 ti "my=21" lw 2 w l, \
+                   "" u 1:25 ti "my=22" lw 2 w l, \
+                   "" u 1:26 ti "my=23" lw 2 w l, \
+                   "" u 1:27 ti "my=24" lw 2 w l
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

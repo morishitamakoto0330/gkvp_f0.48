@@ -1,0 +1,20 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output '../eps/phiinkxky.eps'
+  set size square
+  set pm3d map
+  set nokey
+
+  set title '|phi|'
+  set xlabel 'kx'
+  set ylabel 'ky'
+  set xrange [*:*]
+  set yrange [*:*]
+
+splot '../../adata/gkv.phk.001' u 1:2:3
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

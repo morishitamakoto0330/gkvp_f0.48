@@ -1,0 +1,21 @@
+#!/usr/local/bin/gnuplot
+  set terminal postscript eps enhanced color 14
+  set output '../eps/phiky_reomega.eps'
+  set size 0.6,0.6
+  set border
+  set grid
+  set nokey
+  set pointsize 0
+
+  set xlabel 'Poloidal wavenumber k_y{/Symbol r}_{ti}'
+  set ylabel 'Real frequency of {/Symbol f}_{k_y}(k_x=0) [v_{ti}/L_n]'
+  set xrange [*:*]
+  set yrange [*:*]
+
+plot '../data/phiky_reomega.dat' u 1:2 ti '' w lp
+
+#  set terminal x11
+#  set output
+#  replot
+#  pause -1
+#EOF

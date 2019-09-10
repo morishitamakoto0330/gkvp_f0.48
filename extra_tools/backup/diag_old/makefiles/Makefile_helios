@@ -1,0 +1,24 @@
+#FC = mpiifort
+FC = ifort
+#FFLAGS = -O3 -openmp -assume byterecl
+FFLAGS = -O3 -openmp -assume byterecl -convert big_endian  # To read binary data from FX10, K
+
+SRC = v17diag.f90
+PROG = 'diag.exe'
+
+MKLROOT = /csc/softs/intel/composer_xe_2011_sp1.7.256/mkl
+
+INC = -I$(MKLROOT)/include -I$(MKLROOT)/include/fftw
+LIB = -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -liomp5 -lpthread -lm
+
+diag:	$(SRC)
+	
+	$(FC) $(FFLAGS) $(SRC) -o $(PROG) $(INC) $(LIB)
+
+	\rm -f *.o *.mod
+
+clean:
+	rm -f *.o *.mod ./*.exe ./*.err ./*.out CompileList.txt
+
+clear:
+	rm -f ./*.err ./*.out
