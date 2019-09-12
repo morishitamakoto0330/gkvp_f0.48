@@ -6,7 +6,7 @@
         art_diff=0.d0,
         num_triad_diag=0, &end
  &triad mxt = 0, myt = 0/
- &equib equib_type = "eqdsk", &end
+ &equib equib_type = "analytic", &end
  &run_n inum=%%%,
         ch_res = .false., &end
  &files f_log="%%DIR%%/log/gkvp_f0.48.",
@@ -23,8 +23,8 @@
  &deltt dt_max = 0.1d0,
         adapt_dt = .true., 
         courant_num = 0.5d0, &end
- &physp R0_Ln = 2.2d0,
-        R0_Lt = 7.d0,
+ &physp R0_Ln = 2.22d0,
+        R0_Lt = 6.92.d0,
         nu = 0.d0,
         Anum = 1.d0,
         Znum = 1.d0,
@@ -39,13 +39,13 @@
         vmax = 4.5d0,
         nx0 = 10000, &end
  &nperi n_tht = 3, 
-        kymin = 0.2d0, 
+        kymin = 0.05d0, 
         m_j   = 1, 
         del_c = 0.d0, &end
- &confp eps_r    = 0.1671674719233798d0,
+ &confp eps_r    = 0.18d0,
         eps_rnew = 1.d0,
-        q_0      = 1.898017223069303d0,
-        s_hat    = 9.948939093482438d-2,
+        q_0      = 1.4d0,
+        s_hat    = 0.8d0,
         lprd     = 0.d0,
         mprd     = 0.d0,
         eps_hor  = 0.d0,

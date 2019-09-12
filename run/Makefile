@@ -14,8 +14,8 @@ MATH = gkvp_f0.48_math_SSL2
 FFT = gkvp_f0.48_fft_fftw
 #INC = -I/usr/local/fftw/3.3/include
 #LIB = -SSL2 -L/usr/local/fftw/3.3/lib64 -lfftw3 -lm
-INC = 
-LIB = -SSL2 -lfftw3 -lm
+INC = -I/home/z42737k/opt/fftw-3.3.8/include
+LIB = -SSL2 -L/home/z42737k/opt/fftw-3.3.8/lib -lfftw3 -lm
 
 
 gkvp:	$(SRC)gkvp_f0.48_header.f90\
