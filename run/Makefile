@@ -1,9 +1,12 @@
-FC = mpifrtpx
+#FC = mpifrtpx
+FC = mpif90
 #FFLAGS = -Kfast,parallel,ocl,optmsg=2 -Qt -Cpp -X9 -fs -fw
 #FFLAGS = -Kfast,parallel,ocl,optmsg=2 -Nquickdbg -Qt -Cpp -X9 -fs -fw
-FFLAGS = -Kfast,parallel,nooptmsg -Qt -X9
-FFLAGS_OMP = -Kopenmp 
+#FFLAGS = -Kfast,parallel,nooptmsg -Qt -X9
+FFLAGS = -fast 
+#FFLAGS_OMP = -Kopenmp 
 #FFLAGS_OMP = -Kopenmp -Nquickdbg
+FFLAGS_OMP = -mp
 
 PROG = 'gkvp_mpifft.exe'
 
@@ -15,7 +18,7 @@ FFT = gkvp_f0.48_fft_fftw
 #INC = -I/usr/local/fftw/3.3/include
 #LIB = -SSL2 -L/usr/local/fftw/3.3/lib64 -lfftw3 -lm
 INC = -I/home/z42737k/opt/fftw-3.3.8/include
-LIB = -SSL2 -L/home/z42737k/opt/fftw-3.3.8/lib -lfftw3 -lm
+LIB = -L/home/z42737k/opt/fftw-3.3.8/lib -lfftw3 -lm
 
 
 gkvp:	$(SRC)gkvp_f0.48_header.f90\
